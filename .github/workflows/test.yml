@@ -50,7 +50,7 @@ jobs:
         id: prettier_check_step
         run: |
           OUTPUT=$(npm run prettier:check)
-          echo "##[set-output name=output;]$OUTPUT"
+          echo "::set-output name=body::$OUTPUT"
         shell: bash
         continue-on-error: true
 
@@ -58,7 +58,7 @@ jobs:
         with:
           message: |
             check_if_formatted failed with:
-            ${{ steps.prettier_check_step.outputs.prettier_check }}
+            ${{ steps.prettier_check_step.outputs.body }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]"
           allow-repeats: false
