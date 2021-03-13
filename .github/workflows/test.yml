@@ -62,9 +62,7 @@ jobs:
 
       - name: Check if files are formatted
         id: prettier
-        run: |
-          OUTPUT=$(npm run prettier:check)
-          echo "::set-output name=test::hello"
+        run: echo "::set-output name=test::hello"
         continue-on-error: true
 
       - name: Echo
