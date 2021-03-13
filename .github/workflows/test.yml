@@ -8,6 +8,16 @@ on:
       - v*
 
 jobs:
+  check_if_formatted:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get dependencies
+        run: npm install
+
+      - name: Check if files are formatted
+        run: npm run prettier:check
+
   build:
     runs-on: ${{ matrix.os }}
 
@@ -23,12 +33,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 15
-
-      - name: Get dependencies
-        run: npm install
-
-      - name: Check if files are formatted
-        run: npm run prettier:check
 
       - name: Build app
         uses: samuelmeuli/action-electron-builder@v1
