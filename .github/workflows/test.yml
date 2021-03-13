@@ -57,7 +57,7 @@ jobs:
             ${{ runner.os }}-npm
 
       - name: Get dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
+        if: steps.npm-cache.outputs.cache-hit != 'false'
         run: npm install
 
       - name: Check if files are formatted
