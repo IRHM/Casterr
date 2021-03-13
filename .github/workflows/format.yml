@@ -17,7 +17,7 @@ jobs:
           trigger: "@deploy"
           reaction: rocket
         env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.github_token }}"
       - run: "echo Found it!"
         if: steps.check.outputs.triggered == 'true'
       # - name: Checkout repo
