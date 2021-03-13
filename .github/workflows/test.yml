@@ -10,6 +10,7 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
+    needs: check_if_formatted
 
     strategy:
       matrix:
