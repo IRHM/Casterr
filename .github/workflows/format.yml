@@ -1,0 +1,65 @@
+name: Format all files
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - "**"
+    tags-ignore:
+      - v*
+  issue_comment:
+    types: [created]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: "format my files"
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Checkout repo
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Get dependencies
+        if: steps.check.outputs.triggered == 'true'
+        run: npm install
+
+      - name: Format all
+        id: prettier
+        if: steps.check.outputs.triggered == 'true'
+        run: npm run prettier:formatall
+
+      - name: Commit formatted files
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Format all files
+      # - name: Add comment if prettier fails
+      #   uses: mshick/add-pr-comment@v1
+      #   if: ${{ always() && steps.prettier.outcome == 'failure' }}
+      #   with:
+      #     message: |
+      #       **The 'is_formatted' check failed!**
+      #       Make sure all files are formatted with `npm run prettier:formatall` or comment 'format my files' and I'll do it for you.
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     repo-token-user-login: "github-actions[bot]"
+      #     allow-repeats: false
+      #
+      # - name: Delete comments by github-actions[bot] if prettier succeeds
+      #   uses: izhangzhihao/delete-comment@master
+      #   if: ${{ always() && steps.prettier.outcome != 'failure' }}
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     delete_user_name: github-actions[bot]

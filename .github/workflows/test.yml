@@ -31,7 +31,7 @@ jobs:
           release: false
           use_vue_cli: true
 
-  check_if_formatted:
+  is_formatted:
     runs-on: ubuntu-latest
 
     steps:
@@ -64,19 +64,14 @@ jobs:
         id: prettier
         run: npm run prettier:check
 
-      - uses: mshick/add-pr-comment@v1
+      - name: Add comment if prettier fails
+        uses: mshick/add-pr-comment@v1
         if: ${{ always() && steps.prettier.outcome == 'failure' }}
         with:
           message: |
-            **Test changes / check_if_formatted failed!**
+            **The 'is_formatted' check failed!**
 
-            Make sure all files are formatted with `npm run prettier:formatall`.
+            Make sure all files are formatted with `npm run prettier:formatall` or comment 'format my files' and I'll do it for you.
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]"
           allow-repeats: false
-
-      - uses: izhangzhihao/delete-comment@master
-        if: ${{ always() && steps.prettier.outcome != 'failure' }}
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          delete_user_name: github-actions[bot]
