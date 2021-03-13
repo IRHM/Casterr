@@ -67,11 +67,14 @@ jobs:
           echo "::set-output name=test::hello"
         continue-on-error: true
 
-      - uses: mshick/add-pr-comment@v1
-        with:
-          message: |
-            check_if_formatted failed with:
-            ${{ steps.prettier.outputs.test }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: "github-actions[bot]"
-          allow-repeats: false
+      - name: Echo
+        run: echo ${{ steps.prettier.outputs.test }}
+        continue-on-error: true
+      # - uses: mshick/add-pr-comment@v1
+      #   with:
+      #     message: |
+      #       check_if_formatted failed with:
+      #       ${{ steps.prettier.outputs.test }}
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     repo-token-user-login: "github-actions[bot]"
+      #     allow-repeats: false
