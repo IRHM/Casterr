@@ -51,6 +51,7 @@ jobs:
 
       - name: Check if files are formatted
         run: npm run prettier:check
+        continue-on-error: true
 
       - uses: mshick/add-pr-comment@v1
         with:
