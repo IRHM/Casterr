@@ -52,12 +52,12 @@ jobs:
         id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-npm-c1-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm
+            ${{ runner.os }}-npm-c1
 
       - name: Get dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'false'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Check if files are formatted
