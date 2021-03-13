@@ -56,6 +56,7 @@ jobs:
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
+            check_if_formatted failed with:
             ${{ needs.check_if_formatted.outputs.prettier_check }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]" # The user.login for temporary GitHub tokens
