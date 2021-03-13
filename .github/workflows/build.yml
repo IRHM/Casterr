@@ -20,12 +20,8 @@ jobs:
         with:
           node-version: 15
 
-      - name: Set electron-builder args
-        if: ${{ ! startsWith(github.ref, 'refs/tags/v') }}
-        run: echo '::set-env name=EB_ARGS::--publish=never'
-
       - name: Build app
-        uses: samuelmeuli/action-electron-builder@v1
+        uses: samuelmeuli/action-electron-builder@v1.6.0
         with:
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
@@ -36,5 +32,3 @@ jobs:
           release: ${{ startsWith(github.ref, 'refs/tags/v') }}
 
           use_vue_cli: true
-
-          args: ${{ env.EB_ARGS }}
