@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      prettier_check: ${{ steps.prettier_check.outputs.test }}
+      prettier_check: ${{ steps.prettier_check_step.outputs.test }}
 
     steps:
       - name: Checkout repo
@@ -49,7 +49,7 @@ jobs:
       - name: Get dependencies
         run: npm install
 
-      - id: prettier_check
+      - id: prettier_check_step
         name: Check if files are formatted
         run: npm run prettier:check
         continue-on-error: true
@@ -58,7 +58,7 @@ jobs:
         with:
           message: |
             check_if_formatted failed with:
-            ${{ needs.prettier_check.outputs.prettier_check }}
+            ${{ needs.prettier_check_step.outputs.prettier_check }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]" # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
