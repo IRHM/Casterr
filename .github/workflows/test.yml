@@ -51,8 +51,11 @@ jobs:
         run: |
           OUTPUT=$(npm run prettier:check)
           echo "::set-output name=body::$OUTPUT"
-        shell: bash
         continue-on-error: true
+
+      - name: echo
+        run: |
+          echo "pronit: ${{ steps.prettier_check_step.outputs.body }}"
 
       - uses: mshick/add-pr-comment@v1
         with:
