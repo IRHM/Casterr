@@ -47,7 +47,7 @@ jobs:
           node-version: 15
 
       - name: Get dependencies
-        run: npm install
+        run: npm install prettier
 
       - id: prettier_check_step
         name: Check if files are formatted
