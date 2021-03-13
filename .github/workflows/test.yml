@@ -1,11 +1,11 @@
 name: Test changes
 on:
   push:
-    tags-ignore:
-      - v*
+  # tags-ignore:
+  #   - v*
   pull_request:
-    tags-ignore:
-      - v*
+    # tags-ignore:
+    #   - v*
 
 jobs:
   build:
