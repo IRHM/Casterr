@@ -48,7 +48,7 @@ jobs:
 
       - name: Check if files are formatted
         id: prettier_check_step
-        run: npm run prettier:check
+        run: echo $(npm run prettier:check)
         continue-on-error: true
 
       - uses: mshick/add-pr-comment@v1
@@ -57,5 +57,5 @@ jobs:
             check_if_formatted failed with:
             ${{ steps.prettier_check_step.outputs.prettier_check }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-token-user-login: "github-actions[bot]" # The user.login for temporary GitHub tokens
-          allow-repeats: false # This is the default
+          repo-token-user-login: "github-actions[bot]"
+          allow-repeats: false
