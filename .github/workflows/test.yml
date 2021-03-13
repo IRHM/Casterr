@@ -68,9 +68,15 @@ jobs:
         if: ${{ always() && steps.prettier.outcome == 'failure' }}
         with:
           message: |
-            **Hello**
-            🌏
-            !
+            **Test changes / check_if_formatted failed!**
+
+            Make sure all files are formatted with `npm run prettier:formatall`.
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]"
           allow-repeats: false
+
+      - uses: izhangzhihao/delete-comment@master
+        if: ${{ always() && steps.prettier.outcome != 'failure' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          delete_user_name: github-actions[bot]
