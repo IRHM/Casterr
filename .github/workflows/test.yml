@@ -71,7 +71,7 @@ jobs:
           message: |
             **The 'is_formatted' check failed!**
 
-            Make sure all files are formatted with `npm run prettier:formatall` or comment 'format my files' and I'll do it for you.
+            Make sure all files are formatted with `npm run prettier:formatall`.
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]"
           allow-repeats: false
