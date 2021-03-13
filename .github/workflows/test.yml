@@ -8,8 +8,32 @@ on:
       - v*
 
 jobs:
-  setup:
-    runs-on: [ubuntu-latest, windows-latest]
+  build:
+    runs-on: ${{ matrix.os }}
+    needs: setup
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Build app
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          release: false
+          use_vue_cli: true
+
+  check_if_formatted:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
@@ -23,26 +47,5 @@ jobs:
       - name: Get dependencies
         run: npm install
 
-  build:
-    runs-on: ${{ matrix.os }}
-    needs: setup
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    steps:
-      - name: Build app
-        uses: samuelmeuli/action-electron-builder@v1
-        with:
-          github_token: ${{ secrets.github_token }}
-          release: false
-          use_vue_cli: true
-
-  check_if_formatted:
-    runs-on: ubuntu-latest
-    needs: setup
-
-    steps:
       - name: Check if files are formatted
         run: npm run prettier:check
