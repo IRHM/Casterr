@@ -61,17 +61,17 @@ jobs:
         run: npm install
 
       - name: Check if files are formatted
-        id: prettier_check_step
+        id: prettier_check
         run: |
           OUTPUT=$(npm run prettier:check)
-          echo "::set-output name=body::$OUTPUT"
+          echo "::set-output name=body::test"
         continue-on-error: true
 
       - uses: mshick/add-pr-comment@v1
         with:
           message: |
             check_if_formatted failed with:
-            ${{ steps.prettier_check_step.outputs.body }}
+            ${{ steps.prettier_check.outputs.body }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]"
           allow-repeats: false
