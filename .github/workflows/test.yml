@@ -34,9 +34,6 @@ jobs:
   check_if_formatted:
     runs-on: ubuntu-latest
 
-    outputs:
-      prettier_check: ${{ steps.prettier_check_step.outputs.test }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -58,7 +55,7 @@ jobs:
         with:
           message: |
             check_if_formatted failed with:
-            ${{ needs.prettier_check_step.outputs.prettier_check }}
+            ${{ steps.prettier_check_step.outputs.prettier_check }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           repo-token-user-login: "github-actions[bot]" # The user.login for temporary GitHub tokens
           allow-repeats: false # This is the default
