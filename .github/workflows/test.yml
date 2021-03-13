@@ -1,10 +1,6 @@
 name: Test changes
+
 on:
-  # push:
-  #   branches:
-  #     - "**"
-  #   tags-ignore:
-  #     - v*
   pull_request:
     branches:
       - "**"
@@ -27,6 +23,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 15
+
+      - name: Check if files are formatted
+        run: npm run prettier:check
 
       - name: Build app
         uses: samuelmeuli/action-electron-builder@v1
