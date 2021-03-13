@@ -63,4 +63,4 @@ jobs:
       - name: Check if files are formatted
         run: |
           npm run prettier:check
-        shell: bash --noprofile --norc -eo pipefail {0,1}
+          echo "done"
