@@ -57,10 +57,8 @@ jobs:
             ${{ runner.os }}-npm
 
       - name: Get dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'false'
+        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Check if files are formatted
-        run: |
-          npm run prettier:check
-          echo "done"
+        run: npm run prettier:check
