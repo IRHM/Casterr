@@ -19,7 +19,6 @@ module.exports = {
         productName: "Casterr",
         copyright: "Copyright © 2021 sbondCo",
         compression: "maximum",
-        extends: null,
         linux: {
           target: ["AppImage"],
           icon: "./assets/icons",
