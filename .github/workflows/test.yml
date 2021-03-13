@@ -49,6 +49,7 @@ jobs:
       - name: Check if files are formatted
         id: prettier_check_step
         run: echo $(npm run prettier:check)
+        shell: bash
         continue-on-error: true
 
       - uses: mshick/add-pr-comment@v1
