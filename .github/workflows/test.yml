@@ -51,7 +51,7 @@ jobs:
 
       - id: prettier_check_step
         name: Check if files are formatted
-        run: npm run prettier:check
+        run: echo "::set-output name=test::npm run prettier:check"
         continue-on-error: true
 
       - uses: mshick/add-pr-comment@v1
