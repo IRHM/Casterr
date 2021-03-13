@@ -1,6 +1,7 @@
 <template>
   <div>
-    <section id="notifications"></section>
+    <section id="notifications">
+    </section>
 
     <section id="top">
       <Dragger />
@@ -32,9 +33,9 @@ export default class DefaultLayout extends Vue {
     // If startupPage setting is a page in the application, redirect to it
     // Else go to first page in AppSettings.pages setting
     if (AppSettings.pages.includes(GeneralSettings.startupPage)) {
-      router.push(GeneralSettings.startupPage).catch(() => {});
+      router.push(GeneralSettings.startupPage).catch(()=>{});
     } else {
-      router.push(AppSettings.pages[0]).catch(() => {});
+      router.push(AppSettings.pages[0]).catch(()=>{});
     }
   }
 }

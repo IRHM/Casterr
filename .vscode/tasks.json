@@ -3,7 +3,9 @@
   "tasks": [
     {
       "label": "Run",
-      "dependsOn": ["Run Client App"],
+      "dependsOn": [
+        "Run Client App"
+      ],
       "dependsOrder": "sequence",
       "group": {
         "kind": "build",
