@@ -8,9 +8,24 @@ on:
       - v*
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Get dependencies
+        run: npm install
+
   build:
     runs-on: ${{ matrix.os }}
-    needs: check_if_formatted
+    needs: setup
 
     strategy:
       matrix:
@@ -26,18 +41,8 @@ jobs:
 
   check_if_formatted:
     runs-on: ubuntu-latest
+    needs: setup
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 15
-
-      - name: Get dependencies
-        run: npm install
-
       - name: Check if files are formatted
         run: npm run prettier:check
